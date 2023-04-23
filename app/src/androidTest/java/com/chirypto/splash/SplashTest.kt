@@ -30,4 +30,14 @@ class SplashTest {
             appVersionIsDisplayed()
         }
     }
+
+    @Test
+    fun updateAppDialogDisplayed() {
+        shouldUpdateScreenDisplay(splashTestRule) {
+
+            isUpdateAppDisplayed(splashTestRule, it)
+
+        }
+
+    }
 }
