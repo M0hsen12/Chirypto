@@ -32,12 +32,13 @@ class SplashTest {
     }
 
     @Test
-    fun displayUpdateOrNormalDependsOnState() {
-        shouldUpdateScreenDisplay(splashTestRule) {
+    fun displayDependsOnState() {
+        getSplashState(splashTestRule) { state ->
 
-            shouldUpdateAppDisplayed(splashTestRule, it)
+            displayScreenDependsOnState(splashTestRule, state)
 
         }
-
     }
+
+
 }

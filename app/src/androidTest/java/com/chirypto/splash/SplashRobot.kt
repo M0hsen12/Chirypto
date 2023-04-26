@@ -16,7 +16,7 @@ fun typeTheAppVersion(
 
 }
 
-fun shouldUpdateScreenDisplay(
+fun getSplashState(
     rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
     block: SplashRobot.(state: SplashState) -> Unit
 ): SplashRobot {
@@ -38,15 +38,28 @@ class SplashRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<
         return SplashVerification(rule).apply(block)
     }
 
-    fun shouldUpdateAppDisplayed(
+    fun displayScreenDependsOnState(
         rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
         splashState: SplashState
     ) {
-        val updateTxt = rule.activity.getString(R.string.update_app)
-        val splashTxt = rule.activity.getString(R.string.splash_txt)
-        if (splashState == SplashState.UpdateDialog)
-            rule.onNodeWithText(updateTxt).assertExists(updateTxt)
-        else rule.onNodeWithText(splashTxt).assertExists(splashTxt)
+
+
+        when (splashState) {
+            SplashState.UpdateDialog -> {
+                val updateTxt = rule.activity.getString(R.string.update_app)
+                rule.onNodeWithText(updateTxt).assertExists(updateTxt)
+            }
+
+            SplashState.NetworkConnectivityError -> {
+                val errorTxt = rule.activity.getString(R.string.no_internet)
+                rule.onNodeWithText(errorTxt).assertExists(errorTxt)
+            }
+
+            else -> {
+                val splashTxt = rule.activity.getString(R.string.splash_txt)
+                rule.onNodeWithText(splashTxt).assertExists(splashTxt)
+            }
+        }
 
     }
 
@@ -57,8 +70,6 @@ class SplashVerification(rule: AndroidComposeTestRule<ActivityScenarioRule<MainA
     fun appVersionIsDisplayed() {
     }
 
-    fun isUpdateAppDisplayed(splashTestRule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
 
-    }
 
 }
