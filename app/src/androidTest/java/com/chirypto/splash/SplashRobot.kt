@@ -38,7 +38,7 @@ class SplashRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<
         return SplashVerification(rule).apply(block)
     }
 
-    fun isUpdateAppDisplayed(
+    fun shouldUpdateAppDisplayed(
         rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
         splashState: SplashState
     ) {

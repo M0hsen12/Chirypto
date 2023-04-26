@@ -32,10 +32,10 @@ class SplashTest {
     }
 
     @Test
-    fun updateAppDialogDisplayed() {
+    fun displayUpdateOrNormalDependsOnState() {
         shouldUpdateScreenDisplay(splashTestRule) {
 
-            isUpdateAppDisplayed(splashTestRule, it)
+            shouldUpdateAppDisplayed(splashTestRule, it)
 
         }
 
