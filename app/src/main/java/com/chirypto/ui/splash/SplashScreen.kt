@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.chirypto.R
@@ -27,7 +26,10 @@ fun SplashScreen(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxSize()) {
             when (viewModel.shouldDisplayUpdateApp(stringResource(id = R.string.app_version).toInt())) {
-                SplashState.Error -> {}
+                SplashState.NetworkConnectivityError -> {
+                    DisplayNoInternet(this)
+                }
+
                 SplashState.UpdateDialog -> {
                     DisplayUpdateDialog(this)
                 }
@@ -39,6 +41,26 @@ fun SplashScreen(navController: NavController) {
             }
 
             DisplayAppVersion(this)
+
+        }
+    }
+}
+
+@Composable
+fun DisplayNoInternet(boxScope: BoxScope) {
+    boxScope.apply {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.align(Alignment.Center)
+        ) {
+            Text(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                text = stringResource(id = R.string.no_internet)
+            )
+            Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = { }) {
+                Text(text = "Connect Now!")
+            }
 
         }
     }

@@ -3,4 +3,5 @@
     <string name="app_version">2</string>
     <string name="update_app">Update the application\n</string>
     <string name="splash_txt">splash\n</string>
+    <string name="no_internet">you have no Connectivity to Internet.</string>
 </resources>
