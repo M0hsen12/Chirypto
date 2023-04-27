@@ -1,23 +1,45 @@
 package com.chirypto.ui.splash
 
+import android.util.Log
+import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ProgressIndicatorDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.chirypto.R
+import com.chirypto.ui.composebles.DisplayAppVersion
+import com.chirypto.ui.composebles.DisplayNoInternet
+import com.chirypto.ui.composebles.DisplayProgressbar
+import com.chirypto.ui.composebles.DisplaySplashScreen
+import com.chirypto.ui.composebles.DisplayUpdateDialog
 import com.chirypto.viewModel.splash.SplashViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -41,79 +63,15 @@ fun SplashScreen(navController: NavController) {
             }
 
             DisplayAppVersion(this)
+            DisplayProgressbar(this)
 
         }
     }
 }
 
-@Composable
-fun DisplayNoInternet(boxScope: BoxScope) {
-    boxScope.apply {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.align(Alignment.Center)
-        ) {
-            Text(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = stringResource(id = R.string.no_internet)
-            )
-            Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                onClick = { }) {
-                Text(text = "Connect Now!")
-            }
-
-        }
-    }
-}
-
-@Composable
-fun DisplayAppVersion(boxScope: BoxScope) {
-    boxScope.apply {
-        Text(
-            text = stringResource(id = R.string.app_version),
-            Modifier
-                .align(Alignment.BottomCenter)
-                .padding(10.dp)
-        )
-    }
-
-}
-
-@Composable
-fun DisplayUpdateDialog(boxScope: BoxScope) {
-    boxScope.apply {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .align(Alignment.Center)
-                .fillMaxWidth()
-        ) {
-
-            Text(
-                text = stringResource(id = R.string.update_app),
-                Modifier
-                    .padding(10.dp)
-            )
-            Button(
-                onClick = { }) {
-                Text(text = "update Now!")
-            }
-        }
-    }
 
 
-}
 
-@Composable
-fun DisplaySplashScreen(navController: NavController) {
 
-    Text(
-        text = stringResource(id = R.string.splash_txt),
-        Modifier
-            .padding(10.dp)
-    )
-    Button(onClick = { navController.navigate("Login") }) {
-        Text(text = "Continue")
-    }
-}
+
 
