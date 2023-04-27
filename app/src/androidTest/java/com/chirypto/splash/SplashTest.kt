@@ -40,5 +40,13 @@ class SplashTest {
         }
     }
 
+    @Test
+    fun isProgressBarDisplayed(){
+        getSplashState(splashTestRule){state ->
+            progressBarExistOnScreen(splashTestRule,state)
+        }
+    }
+
+
 
 }

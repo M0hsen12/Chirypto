@@ -1,6 +1,8 @@
 package com.chirypto.splash
 
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.chirypto.MainActivity
@@ -60,16 +62,21 @@ class SplashRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<
                 rule.onNodeWithText(splashTxt).assertExists(splashTxt)
             }
         }
-
     }
 
+    fun progressBarExistOnScreen(
+        rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
+        state: SplashState
+    ) {
+        rule.onNodeWithTag(rule.activity.getString(R.string.splash_progressbar_tag)).assertIsDisplayed()
+
+    }
 
 }
 
 class SplashVerification(rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
     fun appVersionIsDisplayed() {
     }
-
 
 
 }
