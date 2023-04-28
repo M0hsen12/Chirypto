@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Colors
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -19,9 +21,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
@@ -90,16 +97,31 @@ fun DisplayUpdateDialog(boxScope: BoxScope) {
 }
 
 @Composable
-fun DisplaySplashScreen(navController: NavController) {
+fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
+    boxScope.apply {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            horizontalArrangement = Arrangement.Center
+        ) {
 
-    Text(
-        text = stringResource(id = R.string.splash_txt),
-        Modifier
-            .padding(10.dp)
-    )
-    Button(onClick = { navController.navigate("Login") }) {
-        Text(text = "Continue")
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.ic_splash_icon),
+                contentDescription = "",
+                tint = Color.Unspecified,
+            )
+            Text(
+                modifier = Modifier
+                    .padding(10.dp),
+                text = stringResource(id = R.string.app_name_txt).uppercase(),
+                color = Color.White,
+                fontSize = 25.sp,
+                fontFamily = FontFamily.SansSerif
+            )
+        }
     }
+
 }
 
 @Composable

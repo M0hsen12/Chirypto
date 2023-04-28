@@ -58,7 +58,7 @@ class SplashRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<
             }
 
             else -> {
-                val splashTxt = rule.activity.getString(R.string.splash_txt)
+                val splashTxt = rule.activity.getString(R.string.app_name_txt).uppercase()
                 rule.onNodeWithText(splashTxt).assertExists(splashTxt)
             }
         }

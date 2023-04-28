@@ -21,7 +21,7 @@ class SplashViewModel {
     }
 
     private fun userIsOnline(): Boolean {
-        return true
+        return false
     }
 
     fun displayNetworkConnectivityError() =
