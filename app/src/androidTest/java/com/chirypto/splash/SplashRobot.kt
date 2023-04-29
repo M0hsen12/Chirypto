@@ -24,7 +24,7 @@ fun getSplashState(
 ): SplashRobot {
     val viewModel = SplashViewModel()
     val state =
-        viewModel.shouldDisplayUpdateApp(rule.activity.getString(R.string.app_version).toInt())
+        viewModel.gettingTheSplashState(rule.activity.getString(R.string.app_version).toInt())
     return SplashRobot(rule).apply { block.invoke(this, state) }
 }
 
