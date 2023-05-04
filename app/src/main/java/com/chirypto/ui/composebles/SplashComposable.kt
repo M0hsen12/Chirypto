@@ -1,5 +1,6 @@
 package com.chirypto.ui.composebles
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Colors
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,12 +26,12 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
+import com.chirypto.MainActivity
 import com.chirypto.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -96,6 +96,7 @@ fun DisplayUpdateDialog(boxScope: BoxScope) {
 
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
     boxScope.apply {
@@ -119,6 +120,11 @@ fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
                 fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif
             )
+
+            CoroutineScope(Dispatchers.Main).launch { // temp navigation until account manger
+                delay(5000)
+                navController.navigate(MainActivity.SIGNUP_NAV_TAG)
+            }
         }
     }
 
