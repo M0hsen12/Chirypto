@@ -19,6 +19,7 @@ class SignupTest {
             typeName("mohsen")
             typeEmail("mohsen@gmail.com")
             typePhone("09353900053")
+            performClick()
         } verify {
             homeScreenDisplayed()
         }

@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChiryptoTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = SPLASH_NAV_TAG) {
+                NavHost(navController = navController, startDestination = SIGNUP_NAV_TAG) {
                     composable(SPLASH_NAV_TAG) { SplashScreen(navController = navController) }
                     composable(SIGNUP_NAV_TAG) { SignupScreen(navController = navController)  }
                     composable(HOME_NAV_TAG) { HomeScreen(navController = navController)  }

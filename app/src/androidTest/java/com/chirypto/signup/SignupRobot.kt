@@ -4,6 +4,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.chirypto.MainActivity
@@ -42,13 +43,15 @@ class SignupRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<
         rule.onNodeWithText(rule.activity.getString(R.string.phone_hint)).performTextInput(phone)
     }
 
-
+    fun performClick() {
+        rule.onNodeWithText(rule.activity.getString(R.string.signup_btn)).performClick()
+    }
 
 
 }
 class SignupVerification(private val rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
     fun homeScreenDisplayed() {
-        rule.onNodeWithText("home").assertIsDisplayed()
+        rule.onNodeWithText("Home").assertIsDisplayed()
     }
 
 

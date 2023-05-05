@@ -6,4 +6,9 @@
     <string name="no_internet">you have no Connectivity to Internet.</string>
     <string name="splash_progressbar_tag">myProgressBar</string>
     <string name="app_name_txt">Chirypto\n</string>
+    <string name="password_hint">please enter password</string>
+    <string name="name_hint">please enter name\n</string>
+    <string name="email_hint">please enter email</string>
+    <string name="phone_hint">please enter phone</string>
+    <string name="signup_btn">register</string>
 </resources>

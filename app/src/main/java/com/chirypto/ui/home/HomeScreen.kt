@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 @Composable
 fun HomeScreen(navController: NavController) {
     Column {
-        Text(text = "Home!")
+        Text(text = "Home")
         Button(onClick = { navController.navigate("secondScreen") }) {
             Text(text = "Continue")
         }
