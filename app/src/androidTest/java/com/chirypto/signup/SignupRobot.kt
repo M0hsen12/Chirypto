@@ -1,57 +1,49 @@
 package com.chirypto.signup
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextEquals
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.chirypto.MainActivity
-import com.chirypto.MainActivity.Companion.SIGNUP_NAV_TAG
-import com.chirypto.R
-import com.chirypto.splash.SplashVerification
-import com.chirypto.ui.splash.SplashState
-import com.chirypto.viewModel.splash.SplashViewModel
-import kotlinx.coroutines.delay
+import com.chirypto.utill.*
 
 
 fun launchSignup(
-    rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
+    rule: ComposeContentTestRule,
     block: SignupRobot.() -> Unit
 ): SignupRobot {
     return SignupRobot(rule).apply(block)
 
 }
-class SignupRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
+class SignupRobot(private val rule: ComposeContentTestRule) {
     infix fun verify(block: SignupVerification.() -> Unit): SignupVerification {
 
         return SignupVerification(rule).apply(block)
     }
 
     fun typePassword(password:String) {
-        rule.onNodeWithText(rule.activity.getString(R.string.password_hint)).performTextInput(password)
+        rule.onNodeWithText(SIGNUP_PASSWORD_FIELD).performTextInput(password)
     }
 
     fun typeName(name: String) {
-        rule.onNodeWithText(rule.activity.getString(R.string.name_hint)).performTextInput(name)
+        rule.onNodeWithText(SIGNUP_NAME_FIELD).performTextInput(name)
     }
 
     fun typeEmail(email: String) {
-        rule.onNodeWithText(rule.activity.getString(R.string.email_hint)).performTextInput(email)
+        rule.onNodeWithText(SIGNUP_EMAIL_FIELD).performTextInput(email)
     }
 
     fun typePhone(phone :String) {
-        rule.onNodeWithText(rule.activity.getString(R.string.phone_hint)).performTextInput(phone)
+        rule.onNodeWithText(SIGNUP_PHONE_FIELD).performTextInput(phone)
     }
 
     fun performClick() {
-        rule.onNodeWithText(rule.activity.getString(R.string.signup_btn)).performClick()
+        rule.onNodeWithText(SIGNUP_REGISTER_BTN).performClick()
     }
 
 
 }
-class SignupVerification(private val rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
+class SignupVerification(private val rule: ComposeContentTestRule) {
     fun homeScreenDisplayed() {
         rule.onNodeWithText("Home").assertIsDisplayed()
     }

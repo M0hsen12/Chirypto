@@ -1,20 +1,16 @@
 package com.chirypto.signup
 
-import androidx.activity.compose.setContent
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.compose.ComposeNavigator
-import androidx.navigation.compose.NavHost
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.chirypto.MainActivity
-import com.chirypto.ui.signup.SignupScreen
-import kotlinx.coroutines.delay
+import com.chirypto.ui.composebles.MainNavigation
+import com.chirypto.ui.composebles.Screen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,32 +19,30 @@ import kotlin.concurrent.schedule
 
 class SignupTest {
     @get:Rule
-    val rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity> =
-        createAndroidComposeRule()
+    val composeTestRule = createComposeRule()
+    private lateinit var navController: TestNavHostController
 
-    lateinit var navController: TestNavHostController
+    @Before
+    fun setupAppNavHost() {
+        composeTestRule.setContent {
+            navController = TestNavHostController(LocalContext.current)
+            navController.navigatorProvider.addNavigator(ComposeNavigator())
+            MainNavigation(navController = navController)
+            navController.navigate(Screen.Signup.route)
+        }
+    }
 
-//    @Before
-//    fun setupAppNavHost() {
-//
-//        rule.setContent {
-//            navController = TestNavHostController(LocalContext.current)
-//            navController.navigatorProvider.addNavigator(ComposeNavigator())
-////            AppNavHost(navController = navController)
-//            navController.navigate("Signup")
-//
-//        }
-//    }
     @Test
     fun performSignup() {
-        launchSignup(rule) {
-            rule.waitUntilTimeout(7000)
+        launchSignup(composeTestRule) {
+//            composeTestRule.waitUntilTimeout(900)
             typeName("mohsen")
             typeEmail("mohsen@gmail.com")
             typePhone("09353900053")
             typePassword("123456")
             performClick()
         } verify {
+//            composeTestRule.waitUntilTimeout(100)
             homeScreenDisplayed()
         }
     }
@@ -63,6 +57,7 @@ fun ComposeContentTestRule.waitUntilTimeout(
         timeoutMillis = timeoutMillis + 1000
     )
 }
+
 object AsyncTimer {
     var expired = false
     fun start(delay: Long = 1000) {

@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Chirypto</string>
     <string name="app_version">1</string>
-    <string name="update_app">Update the application\n</string>
+    <string name="update_app">Update the application</string>
     <string name="splash_txt">splash\n</string>
     <string name="no_internet">you have no Connectivity to Internet.</string>
     <string name="splash_progressbar_tag">myProgressBar</string>
-    <string name="app_name_txt">Chirypto\n</string>
+    <string name="app_name_txt">Chirypto</string>
     <string name="password_hint">please enter password</string>
-    <string name="name_hint">please enter name\n</string>
+    <string name="name_hint">please enter name</string>
     <string name="email_hint">please enter email</string>
     <string name="phone_hint">please enter phone</string>
     <string name="signup_btn">register</string>

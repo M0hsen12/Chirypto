@@ -121,10 +121,10 @@ fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
                 fontFamily = FontFamily.SansSerif
             )
 //navigate to home or signup
-            CoroutineScope(Dispatchers.Main).launch {
-                delay(1000)
-                navController.navigate(MainActivity.SIGNUP_NAV_TAG)
-            }
+//            CoroutineScope(Dispatchers.Main).launch {
+//                delay(1000)
+//                navController.navigate(MainActivity.SIGNUP_NAV_TAG)
+//            }
         }
     }
 
@@ -160,11 +160,6 @@ fun DisplayProgressbar(boxScope: BoxScope) {
                 }
             }
 
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            delay(1000L)
-            showDialog.value = false
         }
     }
 }
