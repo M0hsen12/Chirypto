@@ -120,9 +120,9 @@ fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
                 fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif
             )
-
-            CoroutineScope(Dispatchers.Main).launch { // temp navigation until account manger
-                delay(5000)
+//navigate to home or signup
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(1000)
                 navController.navigate(MainActivity.SIGNUP_NAV_TAG)
             }
         }
@@ -163,7 +163,7 @@ fun DisplayProgressbar(boxScope: BoxScope) {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            delay(5000L)
+            delay(1000L)
             showDialog.value = false
         }
     }

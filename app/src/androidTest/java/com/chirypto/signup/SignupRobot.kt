@@ -8,10 +8,12 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.chirypto.MainActivity
+import com.chirypto.MainActivity.Companion.SIGNUP_NAV_TAG
 import com.chirypto.R
 import com.chirypto.splash.SplashVerification
 import com.chirypto.ui.splash.SplashState
 import com.chirypto.viewModel.splash.SplashViewModel
+import kotlinx.coroutines.delay
 
 
 fun launchSignup(
