@@ -1,6 +1,8 @@
 package com.chirypto.ui.composebles
 
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,17 +18,25 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.chirypto.MainActivity
 import com.chirypto.R
+import com.chirypto.utill.LOGIN_TXT
+import com.chirypto.utill.SIGNUP_APP_LOGO_TXT
 
 @Composable
 fun displayNormalFieldText(txt: MutableState<String>, placeholder: String, label: String) {
@@ -117,5 +127,45 @@ fun displayRegisterBtn(columnScope: ColumnScope, navController: NavController) {
         }
 
     }
+
+}
+
+@Preview
+@Composable
+fun displaySignupHeader() {
+    Row(
+        Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ) {
+        displayAppLogoWithText()
+        Spacer(modifier = Modifier.weight(1F))
+        Text(
+            text = LOGIN_TXT,
+            modifier = Modifier.padding(5.dp),
+            color = Color(0xFF177DFF),
+            fontSize = 17.sp,
+            fontFamily = FontFamily.SansSerif
+        )
+    }
+}
+
+
+@Composable
+fun displayAppLogoWithText() {
+    Icon(
+        modifier = Modifier.size(48.dp, 32.dp),
+        imageVector = ImageVector.vectorResource(R.drawable.ic_splash_icon),
+        contentDescription = "",
+        tint = Color(0xFF177DFF)
+    )
+    Text(
+        modifier = Modifier
+            .padding(5.dp),
+        text = SIGNUP_APP_LOGO_TXT,
+        color = Color(0xFF177DFF),
+        fontSize = 19.sp, fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.SansSerif
+    )
 
 }

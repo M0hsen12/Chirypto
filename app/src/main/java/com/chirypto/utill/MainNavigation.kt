@@ -1,4 +1,4 @@
-package com.chirypto.ui.composebles
+package com.chirypto.utill
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,16 +1,17 @@
 package com.chirypto.signup
 
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.chirypto.MainActivity
-import com.chirypto.ui.composebles.MainNavigation
-import com.chirypto.ui.composebles.Screen
+import com.chirypto.utill.MainNavigation
+import com.chirypto.utill.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,22 +30,27 @@ class SignupTest {
             navController.navigatorProvider.addNavigator(ComposeNavigator())
             MainNavigation(navController = navController)
             navController.navigate(Screen.Signup.route)
+            composeTestRule.waitUntilTimeout(10000)
         }
     }
 
     @Test
     fun performSignup() {
         launchSignup(composeTestRule) {
-//            composeTestRule.waitUntilTimeout(900)
             typeName("mohsen")
             typeEmail("mohsen@gmail.com")
             typePhone("09353900053")
             typePassword("123456")
             performClick()
         } verify {
-//            composeTestRule.waitUntilTimeout(100)
             homeScreenDisplayed()
         }
+    }
+
+    @Test
+    fun appHeaderIsDisplayed() {
+       composeTestRule.onNodeWithText(SIGNUP_APP_LOGO_TXT).assertIsDisplayed()
+       composeTestRule.onNodeWithText(LOGIN_TXT).assertIsDisplayed()
     }
 }
 

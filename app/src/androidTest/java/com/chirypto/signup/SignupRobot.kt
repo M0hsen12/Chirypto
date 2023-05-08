@@ -13,7 +13,6 @@ fun launchSignup(
     block: SignupRobot.() -> Unit
 ): SignupRobot {
     return SignupRobot(rule).apply(block)
-
 }
 class SignupRobot(private val rule: ComposeContentTestRule) {
     infix fun verify(block: SignupVerification.() -> Unit): SignupVerification {

@@ -9,11 +9,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.chirypto.ui.composebles.MainNavigation
 import com.chirypto.ui.home.HomeScreen
 import com.chirypto.ui.signup.SignupScreen
 import com.chirypto.ui.splash.SplashScreen
 import com.chirypto.ui.theme.ChiryptoTheme
+import com.chirypto.utill.MainNavigation
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("SuspiciousIndentation")
