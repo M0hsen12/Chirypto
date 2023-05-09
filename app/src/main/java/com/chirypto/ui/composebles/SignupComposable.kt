@@ -1,11 +1,8 @@
 package com.chirypto.ui.composebles
 
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
@@ -18,6 +15,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -35,8 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.chirypto.MainActivity
 import com.chirypto.R
-import com.chirypto.utill.LOGIN_TXT
-import com.chirypto.utill.SIGNUP_APP_LOGO_TXT
+import com.chirypto.utill.*
 
 @Composable
 fun displayNormalFieldText(txt: MutableState<String>, placeholder: String, label: String) {
@@ -45,6 +42,7 @@ fun displayNormalFieldText(txt: MutableState<String>, placeholder: String, label
             .fillMaxWidth()
             .padding(16.dp, 8.dp),
         value = txt.value,
+        shape = RoundedCornerShape(12.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             backgroundColor = Color(0xFFF1F6F9),
             unfocusedBorderColor = Color(0xFFF1F6F9),
@@ -79,6 +77,7 @@ fun displayPasswordFieldText(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp, 8.dp),
+        shape = RoundedCornerShape(8.dp),
         value = txt.value,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             backgroundColor = Color(0xFFF1F6F9),
@@ -112,22 +111,28 @@ fun displayPasswordFieldText(
 }
 
 @Composable
-fun displayRegisterBtn(columnScope: ColumnScope, navController: NavController) {
-    columnScope.apply {
+fun displayRegisterBtn(navController: NavController) {
+//    columnScope.apply {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+
         Button(modifier = Modifier
             .size(LocalConfiguration.current.screenWidthDp.div(1.5).dp, 50.dp)
-            .align(Alignment.CenterHorizontally),
+            .align(Alignment.BottomCenter),
             onClick = { navController.navigate(MainActivity.HOME_NAV_TAG) }) {
             Text(
                 modifier = Modifier.align(Alignment.CenterVertically),
                 textAlign = TextAlign.Center,
-                text = stringResource(id = R.string.signup_btn)
+                text = SIGNUP_REGISTER_BTN
             )
 
         }
 
+//    }
     }
-
 }
 
 @Preview
@@ -168,4 +173,27 @@ fun displayAppLogoWithText() {
         fontFamily = FontFamily.SansSerif
     )
 
+}
+
+@Composable
+fun DisplaySignupIndicator() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(0.dp, 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Create yor free account",
+            fontSize = 25.sp,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.Cursive
+        )
+        Text(
+            text = "To get started with Chirypto, create your account",
+            fontSize = 15.sp,
+            color = Color.Gray
+        )
+    }
 }

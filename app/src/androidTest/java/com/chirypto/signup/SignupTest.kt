@@ -30,7 +30,7 @@ class SignupTest {
             navController.navigatorProvider.addNavigator(ComposeNavigator())
             MainNavigation(navController = navController)
             navController.navigate(Screen.Signup.route)
-            composeTestRule.waitUntilTimeout(10000)
+//            composeTestRule.waitUntilTimeout(10000)
         }
     }
 
