@@ -11,4 +11,7 @@
     <string name="email_hint">please enter email</string>
     <string name="phone_hint">please enter phone</string>
     <string name="signup_btn">register</string>
+    <string name="account_type" translatable="false">com.chirypto</string>
+    <string name="authority" translatable="false">com.chirypto.datasync-beta</string>
+
 </resources>
