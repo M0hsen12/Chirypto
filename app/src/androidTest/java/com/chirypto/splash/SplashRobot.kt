@@ -22,7 +22,7 @@ fun getSplashState(
     rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
     block: SplashRobot.(state: SplashState) -> Unit
 ): SplashRobot {
-    val viewModel = SplashViewModel()
+    val viewModel = SplashViewModel("")
     val state =
         viewModel.gettingTheSplashState(rule.activity.getString(R.string.app_version).toInt())
     return SplashRobot(rule).apply { block.invoke(this, state) }

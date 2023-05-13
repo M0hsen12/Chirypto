@@ -18,6 +18,7 @@ import com.chirypto.utill.SIGNUP_EMAIL_FIELD
 import com.chirypto.utill.SIGNUP_NAME_FIELD
 import com.chirypto.utill.SIGNUP_PASSWORD_FIELD
 import com.chirypto.utill.SIGNUP_PHONE_FIELD
+import com.chirypto.viewModel.splash.SplashViewModel
 
 
 @Composable

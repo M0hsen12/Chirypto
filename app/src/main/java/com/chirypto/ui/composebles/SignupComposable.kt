@@ -122,7 +122,7 @@ fun displayRegisterBtn(navController: NavController) {
         Button(modifier = Modifier
             .size(LocalConfiguration.current.screenWidthDp.div(1.5).dp, 50.dp)
             .align(Alignment.BottomCenter),
-            onClick = { navController.navigate(MainActivity.HOME_NAV_TAG) }) {
+            onClick = { navController.navigate("Home") }) {
             Text(
                 modifier = Modifier.align(Alignment.CenterVertically),
                 textAlign = TextAlign.Center,

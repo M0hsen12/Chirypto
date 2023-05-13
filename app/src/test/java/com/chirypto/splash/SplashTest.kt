@@ -17,22 +17,22 @@ class SplashTest {
 
     @Test
     fun gettingTheUpdateApplicationState() {
-        val viewModel = SplashViewModel()
+        val viewModel = SplashViewModel("")
         assertEquals(SplashState.UpdateDialog, viewModel.displayUpdateDialog())
     }   @Test
     fun gettingSplashState() {
-        val viewModel = SplashViewModel()
+        val viewModel = SplashViewModel("")
         assertEquals(SplashState.Normal, viewModel.displaySplash())
     }
     @Test
     fun gettingErrorNetworkConnectivity() {
-        val viewModel = SplashViewModel()
+        val viewModel = SplashViewModel("")
         assertEquals(SplashState.NetworkConnectivityError, viewModel.displayNetworkConnectivityError())
     }
 
     @Test
     fun gettingSplashScreenState(){
-        val viewModel = SplashViewModel()
+        val viewModel = SplashViewModel("")
         assertEquals(SplashState.Normal, viewModel.gettingTheSplashState(BuildConfig.VERSION_CODE))
 
     }
