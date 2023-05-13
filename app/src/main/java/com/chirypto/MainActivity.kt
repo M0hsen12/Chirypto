@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
+import androidx.activity.viewModels
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,8 +14,12 @@ import com.chirypto.ui.signup.SignupScreen
 import com.chirypto.ui.splash.SplashScreen
 import com.chirypto.ui.theme.ChiryptoTheme
 import com.chirypto.utill.MainNavigation
+import com.chirypto.viewModel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel by viewModels()
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +28,6 @@ class MainActivity : ComponentActivity() {
                 MainNavigation()
             }
         }
-    }
-
-    @Composable
-    fun AppNavHost(navController: NavHostController) {
-
-        NavHost(navController = navController, startDestination = SPLASH_NAV_TAG) {
-            composable(SPLASH_NAV_TAG) { SplashScreen(navController = navController) }
-            composable(SIGNUP_NAV_TAG) { SignupScreen(navController = navController) }
-            composable(HOME_NAV_TAG) { HomeScreen(navController = navController) }
-        }
-    }
-
-    companion object {
-        const val SPLASH_NAV_TAG = "Splash"
-        const val SIGNUP_NAV_TAG = "Signup"
-        const val HOME_NAV_TAG = "Home"
     }
 }
 

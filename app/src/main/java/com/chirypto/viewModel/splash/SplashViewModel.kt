@@ -1,11 +1,19 @@
 package com.chirypto.viewModel.splash
 
+import android.util.Log
+import androidx.lifecycle.ViewModel
 import com.chirypto.BuildConfig
+import com.chirypto.model.User
 import com.chirypto.ui.splash.SplashState
+import com.chirypto.utill.accountManger.AccountManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SplashViewModel {
-    val TAG = "SplashViewModel"
-
+@HiltViewModel
+class SplashViewModel @Inject constructor(
+    val accountManager: AccountManager
+) : ViewModel() {
+    val TAG = "QQQ"
 
 
     fun gettingTheSplashState(appVersion: Int): SplashState {
@@ -16,6 +24,21 @@ class SplashViewModel {
         }
 
     }
+    fun addAccount(){
+        accountManager.addAccount(
+            User(
+                id = 1,
+                firstName = "mohsenGG",
+                lastName = "goddarzi",
+                phone = "09353900053",
+                avatar = "asshole",
+                token = "0.1122",
+                refreshToken = "1254545454"
+            ), "123654"
+        )
+    }
+
+    fun getUserName() = accountManager.getFirstName()
 
     private fun userIsOnline(): Boolean {
         return false
