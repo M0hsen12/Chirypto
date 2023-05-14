@@ -12,9 +12,9 @@ import com.chirypto.ui.signup.SignupScreen
 import com.chirypto.ui.splash.SplashScreen
 
 sealed class Screen(val route: String) {
-    object Home: Screen("home")
-    object Signup: Screen("Signup")
-    object Splash: Screen("Splash")
+    object Home : Screen("home")
+    object Signup : Screen("Signup")
+    object Splash : Screen("Splash")
 }
 
 
@@ -26,8 +26,8 @@ fun MainNavigation(
         navController = navController,
         startDestination = Screen.Splash.route
     ) {
-        composable(Screen.Home.route) { HomeScreen(navController)}
+        composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Splash.route) { SplashScreen(navController) }
-        composable(Screen.Signup.route) { SignupScreen(navController ) }
+        composable(Screen.Signup.route) { SignupScreen(navController) }
     }
 }

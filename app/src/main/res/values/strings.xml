@@ -2,7 +2,7 @@
     <string name="app_name">Chirypto</string>
     <string name="app_version">1</string>
     <string name="update_app">Update the application</string>
-    <string name="splash_txt">splash\n</string>
+    <string name="splash_txt">splash</string>
     <string name="no_internet">you have no Connectivity to Internet.</string>
     <string name="splash_progressbar_tag">myProgressBar</string>
     <string name="app_name_txt">Chirypto</string>

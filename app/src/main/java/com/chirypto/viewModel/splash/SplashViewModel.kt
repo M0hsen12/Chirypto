@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    val accountManager: AccountManager
+    private val accountManager: AccountManager
 ) : ViewModel() {
     val TAG = "QQQ"
 

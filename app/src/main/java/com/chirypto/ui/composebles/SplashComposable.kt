@@ -33,6 +33,8 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.chirypto.MainActivity
 import com.chirypto.R
+import com.chirypto.utill.APP_VERSION
+import com.chirypto.utill.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -62,7 +64,7 @@ fun DisplayNoInternet(boxScope: BoxScope) {
 fun DisplayAppVersion(boxScope: BoxScope) {
     boxScope.apply {
         Text(
-            text = stringResource(id = R.string.app_version),
+            text = APP_VERSION.toString(),
             Modifier
                 .align(Alignment.BottomCenter)
                 .padding(10.dp)
@@ -123,7 +125,7 @@ fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
 //navigate to home or signup
 //            CoroutineScope(Dispatchers.Main).launch {
 //                delay(1000)
-//                navController.navigate(MainActivity.SIGNUP_NAV_TAG)
+//                navController.navigate(Screen.Signup.route)
 //            }
         }
     }

@@ -20,13 +20,14 @@ import com.chirypto.ui.composebles.DisplayNoInternet
 import com.chirypto.ui.composebles.DisplayProgressbar
 import com.chirypto.ui.composebles.DisplaySplashScreen
 import com.chirypto.ui.composebles.DisplayUpdateDialog
+import com.chirypto.utill.APP_VERSION
 import com.chirypto.utill.accountManger.AccountManager
 import com.chirypto.viewModel.splash.SplashViewModel
 
 
 @Composable
-fun SplashScreen(navController: NavController, splashViewModel: SplashViewModel = hiltViewModel()) {
-
+fun SplashScreen(navController: NavController) {
+val splashViewModel: SplashViewModel = hiltViewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,10 +35,8 @@ fun SplashScreen(navController: NavController, splashViewModel: SplashViewModel 
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
 
-            splashViewModel.addAccount()
-            Log.e("QQQ", "SplashScreen: ${splashViewModel.getUserName()}" )
 
-            when (splashViewModel.gettingTheSplashState(stringResource(id = R.string.app_version).toInt())) {
+            when (splashViewModel.gettingTheSplashState(APP_VERSION.toInt())) {
                 SplashState.NetworkConnectivityError -> {
                     DisplayNoInternet(this)
                 }
@@ -55,7 +54,6 @@ fun SplashScreen(navController: NavController, splashViewModel: SplashViewModel 
             DisplayAppVersion(this)
             DisplayProgressbar(this)
 
-            Toast.makeText(LocalContext.current, splashViewModel.getUserName(), Toast.LENGTH_SHORT).show()
         }
     }
 }

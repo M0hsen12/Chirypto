@@ -167,7 +167,7 @@ fun displayAppLogoWithText() {
     Text(
         modifier = Modifier
             .padding(5.dp),
-        text = SIGNUP_APP_LOGO_TXT,
+        text = APP_NAME,
         color = Color(0xFF177DFF),
         fontSize = 19.sp, fontWeight = FontWeight.Bold,
         fontFamily = FontFamily.SansSerif
