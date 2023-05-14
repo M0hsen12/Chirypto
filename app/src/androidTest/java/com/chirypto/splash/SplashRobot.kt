@@ -1,17 +1,16 @@
 package com.chirypto.splash
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.chirypto.MainActivity
-import com.chirypto.R
 import com.chirypto.ui.splash.SplashState
+import com.chirypto.utill.APP_NAME
+import com.chirypto.utill.APP_VERSION
 import com.chirypto.viewModel.splash.SplashViewModel
 
 fun typeTheAppVersion(
-    rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
+    rule: ComposeContentTestRule,
     block: SplashRobot.() -> Unit
 ): SplashRobot {
     return SplashRobot(rule).apply(block)
@@ -19,20 +18,19 @@ fun typeTheAppVersion(
 }
 
 fun getSplashState(
-    rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
+    viewModel: SplashViewModel,
+    rule: ComposeContentTestRule,
     block: SplashRobot.(state: SplashState) -> Unit
 ): SplashRobot {
-    val viewModel = SplashViewModel("")
-    val state =
-        viewModel.gettingTheSplashState(rule.activity.getString(R.string.app_version).toInt())
+    val state = viewModel.gettingTheSplashState(APP_VERSION.toInt())
     return SplashRobot(rule).apply { block.invoke(this, state) }
 }
 
 
-class SplashRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
+class SplashRobot(private val rule: ComposeContentTestRule) {
     fun setAppVersion(appVersion: String) {
-        val appV = rule.activity.getString(R.string.app_version)
-        rule.onNodeWithText(appVersion).assertExists(appV)
+
+        rule.onNodeWithText(appVersion).assertIsDisplayed()
     }
 
     infix fun verify(block: SplashVerification.() -> Unit): SplashVerification {
@@ -41,42 +39,40 @@ class SplashRobot(private val rule: AndroidComposeTestRule<ActivityScenarioRule<
     }
 
     fun displayScreenDependsOnState(
-        rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
+        rule: ComposeContentTestRule,
         splashState: SplashState
     ) {
 
 
         when (splashState) {
             SplashState.UpdateDialog -> {
-                val updateTxt = rule.activity.getString(R.string.update_app)
+                val updateTxt = "Update the application"
                 rule.onNodeWithText(updateTxt).assertExists(updateTxt)
             }
 
             SplashState.NetworkConnectivityError -> {
-                val errorTxt = rule.activity.getString(R.string.no_internet)
+                val errorTxt = "you have no Connectivity to Internet."
                 rule.onNodeWithText(errorTxt).assertExists(errorTxt)
             }
 
             else -> {
-                val splashTxt = rule.activity.getString(R.string.app_name_txt).uppercase()
+                val splashTxt = APP_NAME.uppercase()
                 rule.onNodeWithText(splashTxt).assertExists(splashTxt)
             }
         }
     }
 
     fun progressBarExistOnScreen(
-        rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
+        rule: ComposeContentTestRule,
         state: SplashState
     ) {
-        rule.onNodeWithTag(rule.activity.getString(R.string.splash_progressbar_tag)).assertIsDisplayed()
+        rule.onNodeWithTag("myProgressBar").assertIsDisplayed()
 
     }
 
 }
 
-class SplashVerification(rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>) {
-    fun appVersionIsDisplayed() {
-    }
+class SplashVerification(rule: ComposeContentTestRule) {
 
 
 }

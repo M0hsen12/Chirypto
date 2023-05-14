@@ -49,7 +49,7 @@ class SignupTest {
 
     @Test
     fun appHeaderIsDisplayed() {
-       composeTestRule.onNodeWithText(SIGNUP_APP_LOGO_TXT).assertIsDisplayed()
+       composeTestRule.onNodeWithText(APP_NAME).assertIsDisplayed()
        composeTestRule.onNodeWithText(LOGIN_TXT).assertIsDisplayed()
     }
 }
