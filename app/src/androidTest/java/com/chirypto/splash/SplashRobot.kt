@@ -5,8 +5,7 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import com.chirypto.ui.splash.SplashState
-import com.chirypto.utill.APP_NAME
-import com.chirypto.utill.APP_VERSION
+import com.chirypto.utill.*
 import com.chirypto.viewModel.splash.SplashViewModel
 
 fun typeTheAppVersion(
@@ -66,7 +65,7 @@ class SplashRobot(private val rule: ComposeContentTestRule) {
         rule: ComposeContentTestRule,
         state: SplashState
     ) {
-        rule.onNodeWithTag("myProgressBar").assertIsDisplayed()
+        rule.onNodeWithTag(SPLASH_PROGRESS_BAR_TEST_TAG).assertIsDisplayed()
 
     }
 

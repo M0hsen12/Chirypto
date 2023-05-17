@@ -1,6 +1,5 @@
 package com.chirypto.viewModel.splash
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.chirypto.BuildConfig
 import com.chirypto.model.User
@@ -16,33 +15,27 @@ class SplashViewModel @Inject constructor(
     val TAG = "QQQ"
 
 
+
+
     fun gettingTheSplashState(appVersion: Int): SplashState {
         return when {
-            userIsOnline() -> displayNetworkConnectivityError()
-            (BuildConfig.VERSION_CODE < appVersion) -> SplashState.UpdateDialog
+            isOnline() -> displayNetworkConnectivityError()
+            isUpdateNeeded(appVersion) -> SplashState.UpdateDialog
+            isUserSigned() -> SplashState.SignedUser
             else -> SplashState.Normal
         }
 
     }
-    fun addAccount(){
-        accountManager.addAccount(
-            User(
-                id = 1,
-                firstName = "mohsenGG",
-                lastName = "goddarzi",
-                phone = "09353900053",
-                avatar = "asshole",
-                token = "0.1122",
-                refreshToken = "1254545454"
-            ), "123654"
-        )
-    }
 
-    fun getUserName() = accountManager.getFirstName()
+    private fun isUpdateNeeded(appVersion: Int) = (BuildConfig.VERSION_CODE < appVersion)
 
-    private fun userIsOnline(): Boolean {
+
+
+
+    private fun isOnline(): Boolean {
         return false
     }
+    private fun isUserSigned() = accountManager.isLoggedIn()
 
     //fake it until you make it
     fun displayNetworkConnectivityError() =

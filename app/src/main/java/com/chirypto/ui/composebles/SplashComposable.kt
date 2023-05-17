@@ -33,7 +33,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.chirypto.MainActivity
 import com.chirypto.R
-import com.chirypto.utill.APP_VERSION
+import com.chirypto.utill.*
 import com.chirypto.utill.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -65,7 +65,9 @@ fun DisplayAppVersion(boxScope: BoxScope) {
     boxScope.apply {
         Text(
             text = APP_VERSION.toString(),
-            Modifier
+            fontSize = 15.sp,
+            color = Color.White,
+            modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(10.dp)
         )
@@ -122,12 +124,14 @@ fun DisplaySplashScreen(boxScope: BoxScope, navController: NavController) {
                 fontSize = 25.sp,
                 fontFamily = FontFamily.SansSerif
             )
-//navigate to home or signup
-//            CoroutineScope(Dispatchers.Main).launch {
-//                delay(1000)
-//                navController.navigate(Screen.Signup.route)
-//            }
+
         }
+        CircularProgressIndicator(
+            color = Color.White,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(0.dp, 150.dp, 0.dp, 0.dp).testTag(SPLASH_PROGRESS_BAR_TEST_TAG)
+        )
     }
 
 }
@@ -137,6 +141,7 @@ fun DisplayProgressbar(boxScope: BoxScope) {
 
     boxScope.apply {
         val showDialog = remember { mutableStateOf(true) }
+
         if (showDialog.value) {
             Dialog(
                 onDismissRequest = { showDialog.value = false },

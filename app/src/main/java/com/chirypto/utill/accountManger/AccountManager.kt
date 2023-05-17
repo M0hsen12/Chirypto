@@ -32,6 +32,13 @@ class AccountManager(
 //    }
 
     fun getAccountType() = accountType
+    fun isLoggedIn(): Boolean {
+        return AccountManager(
+            context,
+            AccountManager.get(context)
+        ).getAccount().isNotEmpty()
+    }
+
     fun addAccount(user: User, password: String?) {
         if (getAccount().isEmpty()) {
             val account = Account(
@@ -234,29 +241,6 @@ class AccountManager(
         }
     }
 
-
-    fun setFirstName(username: String) {
-        val account = getAccount()
-        if (account.isNotEmpty()) {
-            accountManager.setUserData(
-                account[0],
-                FIRST_NAME,
-                username
-            )
-        }
-    }
-
-    fun getFirstName(): String {
-        val account = getAccount()
-        return if (account.isNotEmpty()) {
-            accountManager.getUserData(
-                account[0],
-                FIRST_NAME
-            ) ?: ""
-        } else {
-            ""
-        }
-    }
 
     fun setUserPhone(phone: String) {
         val account = getAccount()
