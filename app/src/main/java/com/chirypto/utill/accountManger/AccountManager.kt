@@ -12,26 +12,26 @@ import com.chirypto.utill.getApplicationName
 import com.google.gson.Gson
 
 
-
 class AccountManager(
     val context: Context,
     val accountManager: AccountManager
 ) {
 
 
-    private val accountType: String? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        context.packageManager.getApplicationInfo(
-            context.packageName,
-            PackageManager.ApplicationInfoFlags.of(0)
-        ).metaData.getString("account_type") ?: ""
-    } else {
-        context.packageManager.getApplicationInfo(
-            "com.chirypto",
-            PackageManager.GET_META_DATA
-        ).metaData.getString("account_type") ?: ""
-    }
+    private val accountType: String = "com.chirypto"
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//        context.packageManager.getApplicationInfo(
+//            context.packageName,
+//            PackageManager.ApplicationInfoFlags.of(0)
+//        ).metaData.getString("account_type") ?: ""
+//    } else {
+//        context.packageManager.getApplicationInfo(
+//            "com.chirypto",
+//            PackageManager.GET_META_DATA
+//        ).metaData.getString("account_type") ?: ""
+//    }
 
-
+    fun getAccountType() = accountType
     fun addAccount(user: User, password: String?) {
         if (getAccount().isEmpty()) {
             val account = Account(
@@ -203,7 +203,7 @@ class AccountManager(
             if (userJson.isNullOrEmpty()) {
                 return null
             } else {
-                return Gson().fromJson(userJson , User::class.java)
+                return Gson().fromJson(userJson, User::class.java)
 
             }
 

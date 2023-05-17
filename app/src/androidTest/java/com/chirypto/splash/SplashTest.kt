@@ -52,7 +52,7 @@ class SplashTest {
     private lateinit var navController: TestNavHostController
 
     @Before
-    fun Init() {
+    fun setup() {
         hiltRule.inject()
 
         viewModel = SplashViewModel(accountManager)

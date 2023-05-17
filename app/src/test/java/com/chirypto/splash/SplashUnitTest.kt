@@ -1,5 +1,31 @@
 package com.chirypto.splash
 
+import android.content.Context
+import androidx.test.platform.app.InstrumentationRegistry
+import com.chirypto.ui.splash.SplashState
+import com.chirypto.utill.APP_VERSION
+import com.chirypto.utill.accountManger.AccountManager
+import com.chirypto.viewModel.splash.SplashViewModel
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
+import junit.framework.TestCase.assertEquals
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.mock
+import org.robolectric.RobolectricTestRunner
+import javax.inject.Inject
+
+@HiltAndroidTest
+@RunWith(RobolectricTestRunner::class)
+@org.robolectric.annotation.Config(application = HiltTestApplication::class)
+
 class SplashUnitTest {
     /*
     1.testing update state
@@ -8,26 +34,47 @@ class SplashUnitTest {
     4.testing the signedUser (maybe after the sign up)
 
      */
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
-//    @Test
-//    fun gettingTheUpdateApplicationState() {
-//        val viewModel = SplashViewModel("")
-//        assertEquals(SplashState.UpdateDialog, viewModel.displayUpdateDialog())
-//    }   @Test
-//    fun gettingSplashState() {
-//        val viewModel = SplashViewModel("")
-//        assertEquals(SplashState.Normal, viewModel.displaySplash())
-//    }
-//    @Test
-//    fun gettingErrorNetworkConnectivity() {
-//        val viewModel = SplashViewModel("")
-//        assertEquals(SplashState.NetworkConnectivityError, viewModel.displayNetworkConnectivityError())
-//    }
-//
-//    @Test
-//    fun gettingSplashScreenState(){
-//        val viewModel = SplashViewModel("")
-//        assertEquals(SplashState.Normal, viewModel.gettingTheSplashState(BuildConfig.VERSION_CODE))
-//
-//    }
+    private val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
+
+    @Mock
+    lateinit var viewModel: SplashViewModel
+
+    @Inject
+    lateinit var accountManager: AccountManager
+
+    @Before
+    fun setup() {
+        hiltRule.inject()
+        accountManager = AccountManager(context, android.accounts.AccountManager.get(context))
+        viewModel = SplashViewModel(accountManager)
+    }
+
+    @Test
+    fun gettingTheUpdateApplicationState() {
+
+        assertEquals(SplashState.UpdateDialog, viewModel.displayUpdateDialog())
+    }
+
+    @Test
+    fun gettingSplashState() {
+        assertEquals(SplashState.Normal, viewModel.displaySplash())
+    }
+
+    @Test
+    fun gettingErrorNetworkConnectivity() {
+        assertEquals(
+            SplashState.NetworkConnectivityError,
+            viewModel.displayNetworkConnectivityError()
+        )
+    }
+
+    @Test
+    fun gettingSplashScreenState() {
+        assertEquals(SplashState.Normal, viewModel.gettingTheSplashState(APP_VERSION.toInt()))
+
+    }
+
 }

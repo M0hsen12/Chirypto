@@ -27,7 +27,7 @@ import com.chirypto.viewModel.splash.SplashViewModel
 
 @Composable
 fun SplashScreen(navController: NavController) {
-val splashViewModel: SplashViewModel = hiltViewModel()
+    val splashViewModel: SplashViewModel = hiltViewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
