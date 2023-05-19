@@ -1,28 +1,32 @@
 package com.chirypto.ui.signup
 
 
+import android.accounts.AccountManager
+import android.os.Build
+import android.text.TextUtils
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.AndroidUiDispatcher.Companion.Main
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.chirypto.R
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.chirypto.ui.composebles.*
-import com.chirypto.utill.SIGNUP_EMAIL_FIELD
-import com.chirypto.utill.SIGNUP_NAME_FIELD
-import com.chirypto.utill.SIGNUP_PASSWORD_FIELD
-import com.chirypto.utill.SIGNUP_PHONE_FIELD
-import com.chirypto.viewModel.splash.SplashViewModel
+import com.chirypto.utill.*
+import com.chirypto.viewModel.signup.SignupViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import java.util.prefs.Preferences
 
 
 @Composable
-fun SignupScreen(navController: NavController) {
+fun SignupScreen(navController: NavController, signupViewModel: SignupViewModel = hiltViewModel()) {
     Column(
         Modifier
             .fillMaxSize()
@@ -59,6 +63,11 @@ fun SignupScreen(navController: NavController) {
             placeholder = "",
             label = SIGNUP_PASSWORD_FIELD
         )
-        displayRegisterBtn(navController = navController)
+        displayRegisterBtn() { user ->
+            signupViewModel.addUserAccount(user)
+            navController.navigate(Screen.Home.route)
+        }
+
     }
 }
+

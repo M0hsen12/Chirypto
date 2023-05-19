@@ -4,17 +4,18 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import com.chirypto.model.User
 import com.chirypto.utill.getApplicationName
 import com.google.gson.Gson
+import java.util.prefs.Preferences
 
 
 class AccountManager(
     val context: Context,
-    val accountManager: AccountManager
+    private val accountManager: AccountManager
 ) {
 
 
@@ -38,6 +39,7 @@ class AccountManager(
             AccountManager.get(context)
         ).getAccount().isNotEmpty()
     }
+    fun getAccManager() = accountManager
 
     fun addAccount(user: User, password: String?) {
         if (getAccount().isEmpty()) {
@@ -60,24 +62,14 @@ class AccountManager(
                     user.userName
                 )
                 putString(
-                    FIRST_NAME,
-                    user.firstName
-                )
-                putString(
                     AVATAR,
                     user.avatar
                 )
             }
             accountManager.addAccountExplicitly(account, password, userData)
             accountManager.setAuthToken(account, TOKEN, user.token)
-            accountManager.setAuthToken(
-                getAccount().takeIf { it.isNotEmpty() }?.firstOrNull() ?: account,
-                REFRESH_TOKEN,
-                user.refreshToken
-            )
         } else {
             accountManager.setAuthToken(getAccount().first(), TOKEN, user.token)
-            accountManager.setAuthToken(getAccount().first(), REFRESH_TOKEN, user.refreshToken)
             setUserData(
                 USER,
                 Gson().toJson(user)
@@ -89,10 +81,6 @@ class AccountManager(
             setUserData(
                 USER_NAME,
                 user.userName ?: ""
-            )
-            setUserData(
-                FIRST_NAME,
-                user.firstName ?: ""
             )
             setUserData(
                 AVATAR,

@@ -1,6 +1,7 @@
 package com.chirypto.utill
 
 const val APP_VERSION = 1.0
+const val UNIVERSAL_PASSWORD = "passwordOfAccountManager"
 const val SPLASH_PROGRESS_BAR_TEST_TAG = "splashProgressBar"
 const val SIGNUP_NAME_FIELD = "Your first name"
 const val SIGNUP_PASSWORD_FIELD = "Create a strong password"
