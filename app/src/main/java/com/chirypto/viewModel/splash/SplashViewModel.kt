@@ -2,8 +2,8 @@ package com.chirypto.viewModel.splash
 
 import androidx.lifecycle.ViewModel
 import com.chirypto.BuildConfig
-import com.chirypto.model.User
 import com.chirypto.ui.splash.SplashState
+import com.chirypto.utill.APP_VERSION
 import com.chirypto.utill.accountManger.AccountManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,12 +17,12 @@ class SplashViewModel @Inject constructor(
 
 
 
-    fun gettingTheSplashState(appVersion: Int): SplashState {
+    fun gettingTheSplashState(appVersion: Int = APP_VERSION.toInt()): SplashState {
         return when {
             isOnline() -> displayNetworkConnectivityError()
             isUpdateNeeded(appVersion) -> SplashState.UpdateDialog
             isUserSigned() -> SplashState.SignedUser
-            else -> SplashState.Normal
+            else -> SplashState.FirstTimer
         }
 
     }
@@ -45,6 +45,6 @@ class SplashViewModel @Inject constructor(
         SplashState.UpdateDialog // just for test purposes
 
     fun displaySplash() =
-        SplashState.Normal // just for test purposes
+        SplashState.FirstTimer // just for test purposes
 
 }
