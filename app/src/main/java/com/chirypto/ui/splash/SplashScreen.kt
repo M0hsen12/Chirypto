@@ -14,18 +14,17 @@ import com.chirypto.ui.composebles.DisplayNoInternet
 import com.chirypto.ui.composebles.DisplayProgressbar
 import com.chirypto.ui.composebles.DisplaySplashScreen
 import com.chirypto.ui.composebles.DisplayUpdateDialog
-import com.chirypto.utill.APP_VERSION
 import com.chirypto.utill.Screen
 import com.chirypto.viewModel.splash.SplashViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.chirypto.ui.splash.SplashState.*
 
 
 @Composable
-fun SplashScreen(navController: NavController) {
-    val splashViewModel: SplashViewModel = hiltViewModel()
+fun SplashScreen(navController: NavController, splashViewModel: SplashViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,33 +32,34 @@ fun SplashScreen(navController: NavController) {
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
 
+            when (splashViewModel.gettingTheSplashState()) {
 
-            when (splashViewModel.gettingTheSplashState(APP_VERSION.toInt())) {
-                SplashState.NetworkConnectivityError -> {
-                    DisplayNoInternet(this)
-                }
+                NetworkConnectivityError -> DisplayNoInternet(this)
 
-                SplashState.UpdateDialog -> {
-                    DisplayUpdateDialog(this)
-                }
+                UpdateDialog -> DisplayUpdateDialog(this)
 
-                SplashState.SignedUser -> {
-                    delayAndNavigateUserToHome(navController)
-                }
-                else -> {}
+                SignedUser -> delayAndNavigateUserToHome(navController, SignedUser)
+
+                else -> delayAndNavigateUserToHome(navController, FirstTimer)
+
             }
+
             DisplaySplashScreen(this, navController)
             DisplayAppVersion(this)
-            DisplayProgressbar(this)
 
         }
     }
 }
 
-fun delayAndNavigateUserToHome(navController: NavController) {
+fun delayAndNavigateUserToHome(navController: NavController, state: SplashState) {
     CoroutineScope(Dispatchers.Main).launch {
-        delay(5_000)
-        navController.navigate(Screen.Home.route)
+        delay(2_000)
+        navController.navigate(
+            if (state == SignedUser)
+                Screen.Home.route
+            else
+                Screen.Signup.route
+        )
 
     }
 

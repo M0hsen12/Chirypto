@@ -14,11 +14,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.mock
 import org.robolectric.RobolectricTestRunner
 import javax.inject.Inject
 
@@ -60,7 +56,7 @@ class SplashUnitTest {
 
     @Test
     fun gettingSplashState() {
-        assertEquals(SplashState.Normal, viewModel.displaySplash())
+        assertEquals(SplashState.FirstTimer, viewModel.displaySplash())
     }
 
     @Test
@@ -73,7 +69,7 @@ class SplashUnitTest {
 
     @Test
     fun gettingSplashScreenState() {
-        assertEquals(SplashState.Normal, viewModel.gettingTheSplashState(APP_VERSION.toInt()))
+        assertEquals(SplashState.FirstTimer, viewModel.gettingTheSplashState(APP_VERSION.toInt()))
 
     }
 
