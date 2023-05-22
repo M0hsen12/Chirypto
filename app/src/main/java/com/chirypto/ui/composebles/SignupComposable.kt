@@ -1,5 +1,6 @@
 package com.chirypto.ui.composebles
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -56,9 +57,16 @@ fun displayNormalFieldText(txt: MutableState<String>, placeholder: String, label
         label = {
             Text(text = label)
         },
+        isError = when (label) {
+            SIGNUP_EMAIL_FIELD -> (txt.value.length in 1..4 ||
+                    (txt.value.length > 1 && !txt.value.contains("@")))
+            SIGNUP_PHONE_FIELD -> txt.value.length  in 1..10
+            else -> txt.value.length in 1..4
+
+        },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password // HERE
-        ),
+        )
     )
 }
 
@@ -108,7 +116,7 @@ fun displayPasswordFieldText(
 }
 
 @Composable
-fun displayRegisterBtn( onClick: (User) -> Unit) {
+fun displayRegisterBtn(onClick: (User) -> Unit) {
 
     Box(
         Modifier
