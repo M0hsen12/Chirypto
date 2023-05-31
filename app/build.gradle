@@ -16,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "com.chirypto.MyTestRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -28,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '1.8'
     }
     buildFeatures {
         compose true
@@ -41,12 +42,18 @@ android {
         kotlinCompilerExtensionVersion compose_version
     }
     packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
+        resources.excludes.add("META-INF/*")
     }
+
     testOptions {
-        unitTests.includeAndroidResources = true
+
+    }
+    testOptions.unitTests.all {
+        includeAndroidResources = true
+        useJUnitPlatform()
+        testLogging {
+            events 'passed', 'failed', 'skipped', 'standardOut', 'standardError'
+        }
     }
 }
 kapt {
@@ -70,38 +77,57 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
     implementation 'com.google.dagger:hilt-android:2.46'
-    implementation 'com.google.ar:core:1.30.0'
+//    implementation 'com.google.ar:core:1.30.0'
     kapt 'com.google.dagger:hilt-compiler:2.46'
     implementation "androidx.hilt:hilt-navigation-compose:1.1.0-alpha01"
 
     // For instrumentation tests
-    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.46'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.46'
     kaptAndroidTest 'com.google.dagger:hilt-compiler:2.46'
 
     // For local unit tests
     testImplementation 'com.google.dagger:hilt-android-testing:2.46'
     kaptTest 'com.google.dagger:hilt-compiler:2.46'
 
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 //    androidTestImplementation "com.android.support.test:rules:1.5.0"
 //    androidTestImplementation "com.android.support.test:runner:1.5.0"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation("androidx.navigation:navigation-compose:2.6.0-alpha09")
+    implementation "androidx.navigation:navigation-compose:2.6.0-alpha09"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.2"
 
-    debugImplementation("androidx.fragment:fragment-testing:1.6.0-beta01")
-    debugImplementation("androidx.fragment:fragment-ktx:1.6.0-beta01")
-    debugImplementation("androidx.test:core:1.5.0")
-    debugImplementation("androidx.test:rules:1.5.0")
-    debugImplementation("androidx.test:runner:1.5.2")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
-    testImplementation 'org.robolectric:robolectric:4.9'
-    testImplementation "org.mockito:mockito-core:4.11.0"
+//    debugImplementation("androidx.fragment:fragment-testing:1.6.0-beta01")
+//    debugImplementation("androidx.fragment:fragment-ktx:1.6.0-beta01")
+//    debugImplementation("androidx.test:core:1.5.0")
+//    debugImplementation("androidx.test:rules:1.5.0")
+//    debugImplementation("androidx.test:runner:1.5.2")
+//    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+//    testImplementation 'org.robolectric:robolectric:4.9'
+//    testImplementation "org.mockito:mockito-core:4.11.0"
+//
+//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
+//
+//    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.2"
+//    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+//    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+//
+//    // (Optional) If you need "Parameterized Tests"
+//    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.3")
+//
+//    // (Optional) If you also have JUnit 4-based tests
+//    testImplementation("junit:junit:4.13.2")
+//    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.9.3")
+//    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
     // Optional -- mockito-kotlin
-    testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"
+//    testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"
 
 }
