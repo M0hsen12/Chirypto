@@ -49,3 +49,10 @@ open class AboveOreoAccountUpdateListener(private val action: (status: SplashSta
         action(status)
     }
 }
+
+fun String.doesContainNumeric():Boolean{
+   return contains("\\d".toRegex())
+}
+fun String.doesContainAtSign():Boolean{
+   return contains("@")
+}

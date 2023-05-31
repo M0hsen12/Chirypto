@@ -1,10 +1,6 @@
 package com.chirypto.ui.signup
 
 
-import android.accounts.AccountManager
-import android.os.Build
-import android.text.TextUtils
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,17 +8,12 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AndroidUiDispatcher.Companion.Main
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.LifecycleCoroutineScope
 import com.chirypto.ui.composebles.*
 import com.chirypto.utill.*
 import com.chirypto.viewModel.signup.SignupViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import java.util.prefs.Preferences
 
 
 @Composable
@@ -36,8 +27,9 @@ fun SignupScreen(navController: NavController, signupViewModel: SignupViewModel 
         val emailTextFieldState = rememberSaveable { mutableStateOf("") }
         val passwordTextFieldState = rememberSaveable { mutableStateOf("") }
         val phoneTextFieldState = rememberSaveable { mutableStateOf("") }
+        val errorTextState = rememberSaveable { mutableStateOf("") }
         val passwordVisibility = rememberSaveable { mutableStateOf(false) }
-
+        val context = LocalContext.current
 
         displaySignupHeader()
         DisplaySignupIndicator()
@@ -63,9 +55,24 @@ fun SignupScreen(navController: NavController, signupViewModel: SignupViewModel 
             placeholder = "",
             label = SIGNUP_PASSWORD_FIELD
         )
-        displayRegisterBtn() { user ->
-            signupViewModel.addUserAccount(user)
-            navController.navigate(Screen.Home.route)
+        displayRegisterBtn(errorTextState) { user ->
+            signupViewModel.validateUsername(nameTextFieldState.value, onError = {
+                errorTextState.value = SIGNUP_NAME_ERROR
+            })
+            signupViewModel.validateEmail(emailTextFieldState.value, onError = {
+                errorTextState.value = SIGNUP_EMAIL_ERROR
+            })
+            signupViewModel.validatePhone(phoneTextFieldState.value, onError = {
+                errorTextState.value = SIGNUP_PHONE_ERROR
+            })
+            signupViewModel.validatePassword(passwordTextFieldState.value, onError = {
+                errorTextState.value = SIGNUP_PASSWORD_ERROR
+            })
+
+            if (errorTextState.value.isEmpty()) {
+                signupViewModel.addUserAccount(user)
+                navController.navigate(Screen.Home.route)
+            }
         }
 
     }

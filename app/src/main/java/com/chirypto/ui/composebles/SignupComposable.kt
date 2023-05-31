@@ -1,19 +1,14 @@
 package com.chirypto.ui.composebles
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
@@ -28,7 +23,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.chirypto.R
 import com.chirypto.model.User
 import com.chirypto.utill.*
@@ -60,12 +54,12 @@ fun displayNormalFieldText(txt: MutableState<String>, placeholder: String, label
         isError = when (label) {
             SIGNUP_EMAIL_FIELD -> (txt.value.length in 1..4 ||
                     (txt.value.length > 1 && !txt.value.contains("@")))
-            SIGNUP_PHONE_FIELD -> txt.value.length  in 1..10
+            SIGNUP_PHONE_FIELD -> txt.value.length in 1..10
             else -> txt.value.length in 1..4
 
         },
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password // HERE
+            keyboardType = if (label == SIGNUP_PHONE_FIELD) KeyboardType.Number else KeyboardType.Password // HERE
         )
     )
 }
@@ -116,14 +110,19 @@ fun displayPasswordFieldText(
 }
 
 @Composable
-fun displayRegisterBtn(onClick: (User) -> Unit) {
+fun displayRegisterBtn(state: MutableState<String>, onClick: (User) -> Unit) {
 
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-
+        Text(
+            text = state.value,
+            color = Color.Red,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+        )
         Button(modifier = Modifier
             .size(LocalConfiguration.current.screenWidthDp.div(1.5).dp, 50.dp)
             .align(Alignment.BottomCenter),
