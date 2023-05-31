@@ -10,7 +10,6 @@ import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.chirypto.HiltTestActivity
 import com.chirypto.MainActivity
-import com.chirypto.signup.waitUntilTimeout
 import com.chirypto.ui.theme.ChiryptoTheme
 import com.chirypto.utill.APP_VERSION
 import com.chirypto.utill.MainNavigation
