@@ -1,4 +1,4 @@
-package com.chirypto.splash
+package com.chirypto.ui.splash
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
@@ -21,7 +21,6 @@ import javax.inject.Inject
 @HiltAndroidTest
 @RunWith(RobolectricTestRunner::class)
 @org.robolectric.annotation.Config(application = HiltTestApplication::class)
-
 class SplashUnitTest {
     /*
     1.testing update state
